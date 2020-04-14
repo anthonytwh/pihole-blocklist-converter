@@ -1,5 +1,5 @@
-! Converted by: https://github.com/anthonytwh/pihole-blocklist-converter
-! Blocklist: https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt
+# Converted by: https://github.com/anthonytwh/pihole-blocklist-converter
+# Blocklist: https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt
 chip.de
 com.com
 flexytalk.net

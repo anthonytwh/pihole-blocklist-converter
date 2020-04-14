@@ -88,8 +88,8 @@ def writeList(inURL, adList, newFile):
 	'''
 	csvStack = []
 	writer = open(newFile, 'w')
-	writer.write("! Converted by: https://github.com/anthonytwh/pihole-blocklist-converter"+"\n")
-	writer.write("! Blocklist: "+inURL+"\n")
+	writer.write("# Converted by: https://github.com/anthonytwh/pihole-blocklist-converter"+"\n")
+	writer.write("# Blocklist: "+inURL+"\n")
 	for line in adList.splitlines():
 		if line:
 			if line.startswith(("#", "!", "/", "|", "-", "@", "*", "^", "$")) == False:

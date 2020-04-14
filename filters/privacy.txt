@@ -1,5 +1,5 @@
-! Converted by: https://github.com/anthonytwh/pihole-blocklist-converter
-! Blocklist: https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt
+# Converted by: https://github.com/anthonytwh/pihole-blocklist-converter
+# Blocklist: https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt
 taboola.com
 silkenthreadiness.info
 adblockanalytics.com
