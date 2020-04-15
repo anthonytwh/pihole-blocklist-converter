@@ -1,6 +1,5 @@
 # Converted by: https://github.com/anthonytwh/pihole-blocklist-converter
 # Blocklist: https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt
-youtube.com
 haus-garten-test.de
 sozialversicherung-kompetent.de
 bafoeg-aktuell.de
