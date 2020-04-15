@@ -37,25 +37,36 @@ def arg_parse():
 	local_args = parser.parse_args()
 	return local_args
 
+def cleanCSV(bList):
+	''' Clean CSVs.
+		- remove domains with *
+	'''
+	aList = []
+	for item in bList.split(","):
+		if not("*" in item):
+			aList.append(item)
+	return aList
+
 def checkCSV(string):
 	''' Check string for CSV.
 		- looks for ##, #@# and #
 	'''
+	s = False
 	for n in range(0, len(string)):
-		if string[-n] == "#":
-			if string[-n-1] == "#":
-				return string[:-n-1].split(",")
-			if string[-n-1] == "@":
-				return string[:-n-2].split(",")
-			else:
-				return string[:-n].split(",")
+		if string[n] == "*":
+			s = True
+		if string[n] == "#":
+			if s == False:
+				return string[:n].split(",")
+			if s == True: 
+				return cleanCSV(string[:n])
 
 def cleanAdstr(string):
 	'''	Get domain from string.
-		- excludes: wildcards, non-FQDN
+		- excludes: wildcards, incomplete domains
 	'''
 	for n in range(0, len(string)):
-		if string[n] == ("*" or ".js"):
+		if string[n] == ("*" or ".js" or "/"):
 			break
 		if string[n] == "^":
 			return string[:n]
@@ -92,16 +103,30 @@ def writeList(inURL, adList, newFile):
 	writer.write("# Blocklist: "+inURL+"\n")
 	for line in adList.splitlines():
 		if line:
-			if line.startswith(("#", "!", "/", "|", "-", "@", "*", "^", "$")) == False:
-				lineList= checkCSV(line)
-				if lineList and csvStack != lineList:
-					writer.writelines("\n".join(lineList)+"\n")
-				csvStack = lineList 	# don't write duplicate lists
+			try:
+				if line.startswith(("#", "!", "/", "|", "-", "@", "*", "^", "$")) == False:
+					lineList = checkCSV(line)
+					if (lineList) and (lineList != csvStack):
+						writer.writelines("\n".join(lineList)+"\n")
+					csvStack = lineList 	# don't write duplicate lists
+			except:
+				pass
 
-			if line.startswith("||") == True:
-				line = cleanAdstr(line[2:])
-				if line:
-					writer.write(line+"\n")
+			try: 
+				if line.startswith("@@||") == True:
+					line = cleanAdstr(line[4:])
+					if line:
+						writer.write(line+"\n")
+			except: 
+				pass
+
+			try: 
+				if line.startswith("||") == True:
+					line = cleanAdstr(line[2:])
+					if line:
+						writer.write(line+"\n")
+			except: 
+				pass
 
 def main(inURL):
 	''' Main.
